@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление протокола</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+</head>
+<body>
+<section class="vh-200" style="background-color: #2779e2;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-9">
+                <h1 class="text-white mb-4">Форма протокола</h1>
+                <form th:action="@{/saveProtokol}" th:object="${protokol}" method="post">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Название протокола</h6>
+                                </div>
+                                <input type="text" th:field="*{name}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Объект</h6>
+                                </div>
+                                <input type="text" th:field="*{object}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Дата</h6>
+                                </div>
+                                <input type="date" th:field="*{date}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Тип Трансформатора</h6>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select selectpicker show-tick"
+                                            th:field="*{typeTransformator}"
+                                            id="typeTransformator">
+                                        <option value="">Тип трансформатора</option>
+                                        <option th:each="value : ${T(com.example.protokols_mes.enums.TransformatorType).values()}"
+                                                th:value="${value.name()}"
+                                                th:text="${value.translate}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Зав. №</h6>
+                                </div>
+                                <input type="number" th:field="*{factoryNumber}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Мощность кВА</h6>
+                                </div>
+                                <input type="number" th:field="*{powerKVA}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Напряжение кВ</h6>
+                                </div>
+                                <input type="text" th:field="*{power}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Ток. А</h6>
+                                </div>
+                                <input type="text" th:field="*{tokA}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Ек. %</h6>
+                                </div>
+                                <input type="number" th:field="*{ek}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Группа соед-я</h6>
+                                </div>
+                                <input type="text" th:field="*{connectionGroup}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <!--                            <hr class="mx-n3">-->
+                            <!--                            <div class="row align-items-center pt-4 pb-3">-->
+                            <!--                                <div class="col-md-3 ps-5">-->
+                            <!--                                    <h6 class="mb-0">Охлаждение</h6>-->
+                            <!--                                </div>-->
+                            <!--                                <input type="text" th:field="*{cooling}" class="form-control col-4 mb-4"/>-->
+                            <!--                            </div>-->
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Температура обмотки при измерений</h6>
+                                </div>
+                                <input type="text" th:field="*{temperature}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений ВН-бак+НН Сопротивление R15Mom</h6>
+                                </div>
+                                <input type="number" th:field="*{VN_bak_NN_R15}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений НН-бак+ВН Сопротивление R15Mom</h6>
+                                </div>
+                                <input type="number" th:field="*{NN_bak_VN_R15}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений ВН-НН+бак Сопротивление R15Mom</h6>
+                                </div>
+                                <input type="number" th:field="*{VN_NN_bak_R15}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений ВН-бак+НН Сопротивление R60Mom</h6>
+                                </div>
+                                <input type="text" th:field="*{VN_bak_NN_R60}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений НН-бак+ВН Сопротивление R60Mom</h6>
+                                </div>
+                                <input type="text" th:field="*{NN_bak_VN_R60}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Схема измерений ВН-НН+бак Сопротивление R60Mom</h6>
+                                </div>
+                                <input type="text" th:field="*{VN_NN_bak_R60}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Сопротивление обмоток постоянному току измерено при
+                                        температуре</h6>
+                                </div>
+                                <input type="text" th:field="*{temperatura}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы А-В I</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageI_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы А-В II</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageII_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы А-В III</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageIII_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы А-В IV</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageIV_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы А-В V</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageV_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Низкое напряжение фазы A-B</h6>
+                                </div>
+                                <input type="number" th:field="*{lowVoltage_AB}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы B-C I</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageI_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы B-C II</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageII_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы B-C III</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageIII_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы B-C IV</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageIV_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы B-C V</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageV_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Низкое напряжение фазы В-С</h6>
+                                </div>
+                                <input type="number" th:field="*{lowVoltage_BC}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы C-A I</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageI_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы C-A II</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageII_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы C-A III</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageIII_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы C-A IV</h6>
+                                </div>
+                                    <input type="number" th:field="*{highVoltageIV_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Высокое напряжение фазы C-A V</h6>
+                                </div>
+                                <input type="number" th:field="*{highVoltageV_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Низкое напряжение фазы С-А</h6>
+                                </div>
+                                <input type="number" th:field="*{lowVoltage_CA}" step="any" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Примечание</h6>
+                                </div>
+                                <input type="text" th:field="*{note}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Заключение</h6>
+                                </div>
+                                <input type="text" th:field="*{conclusion}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Проверил ФИО</h6>
+                                </div>
+                                <input type="text" th:field="*{fio}" class="form-control col-4 mb-4"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary col-2">Сохранить</button>
+                            <input type="hidden" th:field="*{id}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<a th:href="@{/}">Back to list</a>
+</body>
+</html>
